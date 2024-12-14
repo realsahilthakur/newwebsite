@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-credentials-id']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ec2-user@54.237.199.38"
+                        ssh -o StrictHostKeyChecking=no ec2-user@54.237.199.38 "
                             docker stop production-container || true &&
                             docker rm production-container || true &&
                             docker pull realsahilthakur/newwebsite:latest &&
