@@ -21,5 +21,20 @@ pipeline {
                 '''
             }
         }
+stage('UI Testing') {
+    steps {
+        sh '''
+            # Set up environment for Python
+            python3 -m venv venv
+            source venv/bin/activate
+
+            # Install Selenium
+            pip install selenium chromedriver-autoinstaller
+
+            # Run Selenium tests
+            python ui_test.py
+        '''
+    }
+}
     }
 }
