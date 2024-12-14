@@ -30,7 +30,7 @@ stage('UI Testing') {
             steps {
                 // Ensure Selenium Docker container is running
                 sh 'docker ps | grep selenium_chrome || docker run -d -p 4444:4444 --name selenium_chrome selenium/standalone-chrome'
-
+                sh 'curl -o ui_test.py https://raw.githubusercontent.com/your-repo/your-website/main/ui_test.py'
                 // Run the UI test script (assumes ui_test.py is already in workspace)
                 sh 'python3 ui_test.py'
             }
