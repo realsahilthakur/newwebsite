@@ -21,6 +21,11 @@ pipeline {
                 '''
             }
         }
+stage('Checkout Code') {
+    steps {
+        git 'https://github.com/realsahilthakur/newwebsite.git'
+    }
+}
 stage('UI Testing') {
             steps {
                 // Ensure Selenium Docker container is running
