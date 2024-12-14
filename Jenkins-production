@@ -6,10 +6,10 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-credentials-id']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ec2-user@3.89.139.205  "
-                            docker stop production-container || true &&
+                        ssh -o StrictHostKeyChecking=no ec2-user@3.89.139.205  "               //connect to the EC2 instance securely via SSH.
+                            docker stop production-container || true &&                         
                             docker rm production-container || true &&
-                            docker pull realsahilthakur/newwebsite:latest &&
+                            docker pull realsahilthakur/newwebsite:latest &&                     
                             docker run --name production-container -d -p 8083:80 realsahilthakur/newwebsite:latest
                         "
                     '''
