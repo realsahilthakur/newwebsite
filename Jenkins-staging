@@ -21,10 +21,6 @@ pipeline {
                 '''
             }
         }
-stage('Checkout Code') {
-    steps {
-        git 'https://github.com/realsahilthakur/newwebsite.git'
-    }
-}
+
     }
 }
