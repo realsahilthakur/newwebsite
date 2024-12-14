@@ -115,6 +115,25 @@
         .dark-mode-toggle:hover {
             background: var(--btn-hover-bg);
         }
+
+        /* Cracker Animation */
+        .cracker {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff4500;
+            opacity: 0;
+            animation: fadeInOut 2s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
     </style>
 </head>
 <body>
@@ -180,6 +199,22 @@
                 toggleButton.textContent = '🌙 Dark Mode';
             }
         }
+
+        // Function to create a cracker element
+        function showCracker() {
+            const cracker = document.createElement('div');
+            cracker.classList.add('cracker');
+            cracker.textContent = 'Full Marks Please 🙏';
+            document.body.appendChild(cracker);
+
+            // Remove the cracker after animation ends
+            setTimeout(() => {
+                cracker.remove();
+            }, 3000);
+        }
+
+        // Trigger cracker every 5 seconds
+        setInterval(showCracker, 1500);
     </script>
 </body>
 </html>
