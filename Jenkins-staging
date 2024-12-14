@@ -22,19 +22,13 @@ pipeline {
             }
         }
 stage('UI Testing') {
-    steps {
-        sh '''
-            # Set up environment for Python
-            python3 -m venv venv
-            source venv/bin/activate
+            steps {
+                // Ensure Selenium Docker container is running
+                sh 'docker ps | grep selenium_chrome || docker run -d -p 4444:4444 --name selenium_chrome selenium/standalone-chrome'
 
-            # Install Selenium
-            pip install selenium chromedriver-autoinstaller
-
-            # Run Selenium tests
-            python ui_test.py
-        '''
-    }
-}
+                // Run the UI test script (assumes ui_test.py is already in workspace)
+                sh 'python3 ui_test.py'
+            }
+        }
     }
 }
