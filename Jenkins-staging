@@ -21,6 +21,11 @@ pipeline {
                 '''
             }
         }
+    stage('Sucess stage') {
+            steps {
+               echo "sucess"
+            }
+        }
 
     }
 }
