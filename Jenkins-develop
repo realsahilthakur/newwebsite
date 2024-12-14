@@ -3,13 +3,13 @@ pipeline {
     stages {
         stage('Cleanup') {
             steps {
-                cleanWs()
+                cleanWs() // Cleans the workspace before the build starts
             }
         }
 
         stage('Clone Repository') {
             steps {
-                checkout scm
+                checkout scm // Clones the repository associated with this Jenkins pipeline
             }
         }
 
@@ -24,7 +24,7 @@ pipeline {
 
         stage('Test Container') {
             steps {
-                sh 'curl -I http://192.168.58.130:8081'
+                sh 'curl -I http://192.168.58.130:8081' // Performs a simple HTTP header request to ensure the container is running
             }
         }
 
@@ -33,14 +33,15 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-auth', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
                     sh 'docker push realsahilthakur/newwebsite'
-                    sh "docker push realsahilthakur/newwebsite:develop-${env.BUILD_ID}"                    
+                    sh "docker push realsahilthakur/newwebsite:develop-${env.BUILD_ID}"
                 }
             }
-        stage('Auto Trigger Staging'){
-            steps{
-                 build 'Websitestaging'
+        }
+
+        stage('Auto Trigger Staging') {
+            steps {
+                build job: 'Websitestaging' // Triggers the staging pipeline/job
             }
         }
     }
-}
 }
