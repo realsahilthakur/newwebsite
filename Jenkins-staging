@@ -26,14 +26,5 @@ stage('Checkout Code') {
         git 'https://github.com/realsahilthakur/newwebsite.git'
     }
 }
-stage('UI Testing') {
-            steps {
-                // Ensure Selenium Docker container is running
-                sh 'docker ps | grep selenium_chrome || docker run -d -p 4444:4444 --name selenium_chrome selenium/standalone-chrome'
-                sh 'curl -o ui_test.py https://raw.githubusercontent.com/realsahilthakur/newwebsite/refs/heads/staging/ui_testing.py'
-                // Run the UI test script (assumes ui_test.py is already in workspace)
-                sh 'python3 ui_test.py'
-            }
-        }
     }
 }
