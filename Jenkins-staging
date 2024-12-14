@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build and run docker image') {
+            steps {
+                sh '''
+                    docker stop websitestaging || true
+                    docker rm websitestaging || true
+
+                    docker pull realsahilthakur/newwebsite:latest
+
+                    docker run --name websitestaging -d -p 8082:80 realsahilthakur/newwebsite:latest
+                '''
+            }
+        }
+        stage('Testing') {
+            steps {
+                sh '''
+                    # Test the running container
+                    curl -I http://192.168.58.130:8082
+                '''
+            }
+        }
+    }
+}
