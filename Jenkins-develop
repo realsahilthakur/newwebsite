@@ -36,6 +36,8 @@ pipeline {
                     sh "docker push realsahilthakur/newwebsite:develop-${env.BUILD_ID}"                    
                 }
             }
+        stage('Auto Trigger Staging'){
+                 build 'Websitestaging'
         }
     }
 }
